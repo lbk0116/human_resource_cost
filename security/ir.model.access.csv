@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+hr_re_cost_1all,hr_re_cost1 all,model_humen_resource_cost_hr_cost,humen_resource_cost.group_manager,1,1,1,1
+hr_re_cost_2all,hr_re_cost2 all,model_humen_resource_cost_hr_cost,humen_resource_cost.group_manager_vice,1,0,0,0
+
+hr_re_cost_3all,hr_re_cost3 all,model_humen_resource_cost_hr_wages,humen_resource_cost.group_manager,1,1,1,1
+hr_re_cost_4all,hr_re_cost4 all,model_humen_resource_cost_hr_wages,humen_resource_cost.group_manager_vice,1,0,0,0
+
+hr_re_cost_5all,hr_re_cost5 all,model_humen_resource_cost_reimbursement,humen_resource_cost.group_manager,1,1,1,1
+hr_re_cost_6all,hr_re_cost6 all,model_humen_resource_cost_reimbursement,humen_resource_cost.group_manager_vice,1,0,0,0
+

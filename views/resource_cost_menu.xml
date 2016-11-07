@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<openerp>
+    <data>
+        <record id="resource_cost_list_action" model="ir.actions.act_window" >
+            <field name="name">人力资源成本</field>
+            <field name="res_model">humen_resource_cost.hr_wages</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,graph</field>
+            <field name="search_view_id" ref="humen_cost_search_view"></field>
+           <!-- <field name="view_id" ref="resource_cost_tree_view"/>-->
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">创建第一条成本表
+                </p>
+            </field>
+        </record>
+
+        <record id="action_server_desk_all_case1_tree" model="ir.actions.act_window.view">
+            <field name="view_mode">tree</field>
+            <field name="sequence" eval="1"/>
+            <field name="view_id" ref="humen_cost_tree_view" />
+            <field name="act_window_id" ref="resource_cost_list_action"/>
+        </record>
+        <record id="action_server_desk_all_case2_form" model="ir.actions.act_window.view">
+            <field name="view_mode">form</field>
+            <field name="sequence" eval="12"/>
+            <field name="view_id" ref="humen_cost_form_view" />
+            <field name="act_window_id" ref="resource_cost_list_action"/>
+        </record>
+        <record id="resource_export_list_action" model="ir.actions.act_window" >
+            <field name="name">成本表</field>
+            <field name="res_model">humen_resource_cost.hr_cost</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,graph</field>
+            <!--<field name="view_id" ref="resource_cost_tree_view"/>-->
+            <field name="search_view_id" ref="humen_export_search_view"></field>
+            <field name="context">{"group_by":"date"}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">年度成本表检测数据后自动生成
+                </p>
+            </field>
+        </record>
+
+        <record id="resource_reimburse_list_action" model="ir.actions.act_window" >
+            <field name="name">报销表</field>
+            <field name="res_model">humen_resource_cost.reimbursement</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,graph</field>
+            <!--<field name="view_id" ref="resource_cost_tree_view"/>-->
+            <field name="search_view_id" ref="humen_reimbursement_search_view"></field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">创建第一条报销表
+                </p>
+            </field>
+        </record>
+
+
+
+        <!-- top level menu: no parent -->
+        <menuitem id="main_resource_cost_menu" name="Resource cost"/>
+        <!-- A first level in the left side menu is needed before using action= attribute -->
+        <menuitem id="resource_cost_menu" name="Cost" parent="main_resource_cost_menu"/>
+        <!--<menuitem id="resource_export_menu" name="Export" parent="main_resource_cost_menu"/>-->
+        <menuitem id="resource_reimburse_menu" name="Reimburse" parent="main_resource_cost_menu"/>
+        <!-- A second level in the left side menu is needed before using action= attribute -->
+       <!--<menuitem id="all_cost_menu" name="All Cost" parent="resource_cost_menu" action="server_desk_case_list_action" groups="base.group_server_desk_cds,base.group_server_desk_manager"/>-->
+        <menuitem id="all_cost_menu" name="All Cost" parent="resource_cost_menu" action="resource_cost_list_action" />
+        <menuitem id="all_export_menu" name="All Export" parent="resource_cost_menu" action="resource_export_list_action" />
+        <menuitem id="all_reimburse_menu" name="All Reimburse" parent="resource_reimburse_menu" action="resource_reimburse_list_action" />
+         </data>
+</openerp>

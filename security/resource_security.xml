@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data noupdate="0">
+    <record model="res.groups" id="base.group_user">
+        <field name="comment">the user will be able to manage his own human resources stuff (leave request, timesheets, ...), if he is linked to an employee in the system.</field>
+    </record>
+
+    <record model="res.groups" id="humen_resource_cost.group_manager">
+        <field name="name">总裁</field>
+        <field name="category_id" ref="base.module_category_humenresource_cost"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        <field name="comment">the user will be able to manage his own human resources stuff (leave request, timesheets, ...), if he is linked to an employee in the system.</field>
+    </record>
+
+    <record model="res.groups" id="humen_resource_cost.group_manager_vice">
+        <field name="name">副总裁</field>
+        <field name="category_id" ref="base.module_category_humenresource_cost"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        <field name="comment">the user will be able to manage his own human resources stuff (leave request, timesheets, ...), if he is linked to an employee in the system.</field>
+    </record>
+     <!--下面是新的权限-->
+    <!--<record id="hr_re_manager_rule" model="ir.rule">-->
+        <!--<field name="name">总裁权限</field>-->
+        <!--<field name="model_id" ref="hr.model_hr_wages"/>-->
+        <!--<field name="groups" eval="[(4,ref('humen_resource_cost.group_manager'))]"/>-->
+        <!--<field name="perm_write" eval="1"/>-->
+        <!--<field name="perm_read" eval="1"/>-->
+        <!--<field name="perm_create" eval="1"/>-->
+        <!--<field name="perm_unlink" eval="1"/>-->
+    <!--</record>-->
+    <!--<record id="hr_re_manager_vice_rule" model="ir.rule">-->
+        <!--<field name="name">副总裁权限</field>-->
+        <!--<field name="model_id" ref="hr.model_hr_wages"/>-->
+        <!--<field name="groups" eval="[(4,ref('humen_resource_cost.group_manager_vice'))]"/>-->
+        <!--<field name="perm_write" eval="0"/>-->
+        <!--<field name="perm_read" eval="1"/>-->
+        <!--<field name="perm_create" eval="0"/>-->
+        <!--<field name="perm_unlink" eval="0"/>-->
+    <!--</record>-->
+
+
+
+    <!--base.group_partner_manager是人力总经理组-->
+    <!--project.group_project_manager是任务和项目总经理组-->
+
+
+
+    </data>
+</openerp>

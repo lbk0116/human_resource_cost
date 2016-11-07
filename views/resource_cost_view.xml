@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="humen_cost_form_view">
+            <field name="name">hr_wages.form</field>
+            <field name="model" >humen_resource_cost.hr_wages</field>
+            <field name="arch" type="xml">
+                <form string="hr_wages Form" create="false">
+                    <group>
+                        <group>
+                                <field name="name" string = "姓名"/>
+                                <field name="work_email" string = "南天邮箱"/>
+                                <field name="monthly_wages" string = "本月工资"/>
+                                <field name="project_subsidy" string = "项目补贴"/>
+                                <field name="special_benefit" string = "特殊补贴"/>
+                                <field name="other_allowance" string = "其它补贴"/>
+                                <field name="three_funds" string = "三项经费"/>
+                                <field name="department_alaverage_amortization" string = "部门平均摊销"/>
+                                <field name="asset_depreciation_allocation" string = "资产折旧分摊"/>
+                        </group>
+                             <group>
+                                <field name="housing_fund" string = "住房公积金"/>
+                                <field name="endowment_insurance" string = "养老保险"/>
+                                <field name="unemployment_insurance" string = "失业保险"/>
+                                <field name="medical_insurance" string = "医疗保险"/>
+                                <field name="maternity_insurance" string = "生育保险"/>
+                                <field name="employment_injury_insurance" string = "工伤保险"/>
+                                <field name="department_first" string = " 一级部门"/>
+                                 <field name="department_second" string = " 二级部门"/>
+                                 <field name="department_third" string = " 三级部门"/>
+                                 <field name="cost_coefficient" string = "费用系数"/>
+                                 <!--<field name="sum" string = "test总计"/>-->
+                             </group>
+                    </group>
+                    <field name ='hr_cost_ids' string = "人力资源">
+                        <tree string="Registered feedback" edit="true">
+                            <field name="date" string = "月份"/>
+                            <field name="monthly_wage_s" string = "当月工资"/>
+                            <field name="monthly_fee_for_service" string = "月度实报实销"/>
+                            <!--<field name="cost_coefficient" string = "费用系数"/>-->
+                            <!--<field name="cost" string = "费用（按照0.5天计算)"/>-->
+                            <field name="cost_month" string = "月费用"/>
+                            <field name="cost_day" string = "0.5天费用"/>
+                            <!--<field name="employee_id" string = "员工报销明细"/>-->
+                        </tree>
+                    </field>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="humen_cost_tree_view">
+            <field name="name">hr_wages.tree</field>
+            <field name="model">humen_resource_cost.hr_wages</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" string = "姓名"/>
+                    <field name="monthly_wages" string = "本月工资"/>
+                    <field name="project_subsidy" string = "项目补贴"/>
+                    <field name="special_benefit" string = "特殊补贴"/>
+                    <field name="other_allowance" string = "其它补贴"/>
+                    <field name="three_funds" string = "三项经费"/>
+                    <field name="cost_day" string = "费用（按照0.5天计算)"/>
+                    <!--<field name="cost" string = "费用（按照0.5天计算)"/>-->
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="humen_cost_search_view">
+            <field name="name">hr_wages.search</field>
+            <field name="model">humen_resource_cost.hr_wages</field>
+            <field name="arch" type="xml">
+                <search  string="Search_t">
+                    <field name="name" string = "姓名"/>
+                    <group expand="0" string="分组">
+                        <!--<filter string="月份" name="date" context="{'group_by':'date:month'}"/>-->
+                        <filter string="一级部门" name="department_first" context="{'group_by':'department_first'}"/>
+                        <filter string="二级部门" name="department_second" context="{'group_by':'department_second'}"/>
+                        <filter string="三级部门" name="department_third" context="{'group_by':'department_third'}"/>
+                    </group>
+
+                </search>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="humen_resource_cost_hr_wages_graph">
+            <field name="name">humen_resource_cost.hr_wages_graph</field>
+            <field name="model">humen_resource_cost.hr_wages</field>
+            <field name="arch" type="xml">
+                <!--<field name="interval">month</field>-->
+                <graph string="hr_cost graph" type="bar" >
+                    <field name="department_second" string = "二级部门" type = "row" />
+                        <field name="cost_day" string = "0.5天费用" operator="+"/>
+                </graph>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="humen_reimbursement_form_view">
+            <field name="name">reimbursement.form</field>
+            <field name="model" >humen_resource_cost.reimbursement</field>
+            <field name="arch" type="xml">
+                <!--<form string="hr_cost Form" create="false" edit="true" >-->
+                <form string="reimbursement Form" create="false">
+                    <group>
+                        <group>
+                            <!--<field name ='hr_cost_id' string = "关联工资表" ></field>-->
+                            <!--<field name ='employee_id' string = "关联人员" ></field>-->
+                            <field name ='name' string = "姓名" ></field>
+                            <field name ='department' string = "部门"/>
+                            <field name="project" string = "项目"/>
+                            <field name="date" string = "日期" />
+                            <field name="kinds" string = "费用种类"></field>
+                            <field name="pay" string = "报销费用"/>
+                            <field name="work_mail" string = "南天邮箱"/>
+                            <field name="test" string = "数据状态"/>
+                        </group>
+                    </group>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="humen_reimbursement_tree_view">
+            <field name="name">reimbursement.tree</field>
+            <field name="model">humen_resource_cost.reimbursement</field>
+            <field name="arch" type="xml">
+                <tree string="reimbursement Tree" >
+                    <!--<field name ='employee_id' string = "关联人员" ></field>-->
+                    <field name ='name' string = "姓名" ></field>
+                    <field name ='department' string = "部门"/>
+                    <field name="date" string = "日期" />
+                    <field name="kinds" string = "费用种类"></field>
+                    <field name="project" string = "项目"/>
+                    <field name="pay" string = "报销费用"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="humen_reimbursement_search_view">
+            <field name="name">reimbursement.search</field>
+            <field name="model">humen_resource_cost.reimbursement</field>
+            <field name="arch" type="xml">
+                <search string="search_s">
+                <group expand="0" string="分组">
+                        <filter string="月份" name="date" context="{'group_by':'date:month'}"/>
+                    <filter string="费用种类" name="kinds" context="{'group_by':'kinds'}"/>
+                    <filter string="部门" name="department" context="{'group_by':'department'}"/>
+                    <filter string="项目" name="project" context="{'group_by':'project'}"/>
+                </group>
+                </search>
+
+            </field>
+        </record>
+        <record model="ir.ui.view" id="humen_resource_cost_reimbursement_graph">
+            <field name="name">humen_resource_cost.reimbursement_graph</field>
+            <field name="model">humen_resource_cost.reimbursement</field>
+            <field name="arch" type="xml">
+                <!--<field name="interval">month</field>-->
+                <graph string="hr_cost graph" type="bar" >
+                    <field name ='department' string = "部门" type = "row"/>
+                    <field name="pay" string = "报销费用" operator="+"/>
+                </graph>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="humen_export_form_view">
+            <field name="name">hr_cost.form</field>
+            <field name="model" >humen_resource_cost.hr_cost</field>
+            <field name="arch" type="xml">
+                <!--<form string="hr_cost Form" create="false" edit="true" >-->
+                <form string="hr_cost Form" create="false">
+                    <group>
+                        <group>
+                        <field name ='employee_id' string = "姓名" ></field>
+                        <field name ='date' string = "月份"  />
+                        <field name="cost_day" string = "费用（按照0.5天计算)"/>
+                        <field name="cost_month" string = "费用（月总计)"/>
+                        <field name="monthly_wage_s" string = "月工资" />
+                        <field name="monthly_fee_for_service" string = "月度实报实销"></field>
+                        <field name ='reimbursement_ids' string = "报销列表">
+                                    <tree string="Registered feedback" edit="true">
+                                        <!--<field name ='department' string = "部门"/>-->
+                                        <field name="date" string = "日期" />
+                                        <field name="kinds" string = "费用种类"></field>
+                                        <field name="project" string = "项目"/>
+                                        <field name="pay" string = "报销费用"/>
+                                    </tree>
+                        </field>
+                        <field name="department_first" string = " 一级部门"/>
+                        <field name="department_second" string = " 二级部门"/>
+                        <field name="department_third" string = " 三级部门"/>
+                        <field name="test" string = "数据状态"/>
+                        </group>
+                    </group>
+
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="humen_export_tree_view">
+            <field name="name">hr_cost.tree</field>
+            <field name="model">humen_resource_cost.hr_cost</field>
+            <field name="arch" type="xml">
+                <tree string="hr_cost Tree" >
+                    <field name ='employee_id' string = "姓名"></field>
+                    <!--<field name ='date' string = "月份" />-->
+                    <field name="monthly_wage_s" string = "月工资" />
+                    <field name="monthly_fee_for_service" string = "本月度实报实销"></field>
+                    <field name="cost_month" string = "费用（月计算)"/>
+                    <field name="cost_day" string = "费用（按照0.5天计算)"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="humen_export_search_view">
+            <field name="name">hr_cost.search</field>
+            <field name="model">humen_resource_cost.hr_cost</field>
+            <field name="arch" type="xml">
+                <search string="search_s">
+                <group expand="0" string="分组">
+                    <!--<field name ='employee_id' string = "姓名" ></field> -->
+                    <!--<filter string="姓名" name="employee_id" context="{'group_by':'employee_id'}"/>-->
+                        <filter string="月份" name="date" context="{'group_by':'date:month'}"/>
+                    <filter string="一级部门" name="department_first" context="{'group_by':'department_first'}"/>
+                    <filter string="二级部门" name="department_second" context="{'group_by':'department_second'}"/>
+                        <filter string="三级部门" name="department_third" context="{'group_by':'department_third'}"/>
+                </group>
+                </search>
+
+            </field>
+        </record>
+        <record model="ir.ui.view" id="humen_resource_cost_hr_cost_graph">
+            <field name="name">humen_resource_cost.hr_cost_graph</field>
+            <field name="model">humen_resource_cost.hr_cost</field>
+                <field name="arch" type="xml">
+                <!--<field name="interval">month</field>-->
+                    <graph string="hr_cost graph" type="bar" >
+                        <field name ='date' string = "月份" type = "row" />
+                        <!--这个位置怎么只显示月份-->
+                        <field name="cost_day" string = "0.5天费用" operator="+"/>
+                    </graph>
+                </field>
+        </record>
+
+    </data>
+</openerp>

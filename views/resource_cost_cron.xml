@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<openerp>
+    <data >
+        <record model="ir.cron" id="resource_cost_cron">
+            <field name="name">每天检测工资表使其生成当月的成本表</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="active" eval="True"/>
+            <field name="model" eval="'humen_resource_cost.hr_cost'"/>
+            <field name="function" eval="'make_cost_list'"/>
+            <field name="args" eval="'(False,)'" />
+        </record>
+
+    </data>
+</openerp>
