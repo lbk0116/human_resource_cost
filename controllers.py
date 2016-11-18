@@ -1,67 +1,33 @@
 # -*- coding: utf-8 -*-
-from openerp import http
+from openerp import http, fields
+import json
 
-class Academy(http.Controller):
-    @http.route('/academy/', auth='public', website=True)
-    def index(self):
-        m = http.request.env['academy.teachers']
-        return http.request.render('academy.index2',
-                                   {'teachers': m.search([]),}
-                                   )
-        '''
-        return http.request.render('academy.index2', {
-            'teachers': ["Diana Padilla1", "Jody Caroll3", "Lester Vaughn5"],
-        })'''
+class Data(http.Controller):
+    @http.route('/compute_task_costs/', type='http', auth='public', methods=['POST'])
+    def compute_task_cost(self, **post):
+        pass
 
-    @http.route('/academy/<model("academy.teachers"):teacher>/', auth='public', website=True)
-    def teacher(self, teacher):
-        return http.request.render('academy.biography', {'person': teacher})
-
-
-    #@http.route ('/firewell/', auth ='public',website=True)
-    @http.route('/firewell/', auth ='public',website = True)
-    def index1(self):
-
-        m = http.request.env['academy.teachers']
-        '''return http.request.render('academy.index',
-                                   {'teachers': m.search([]),}
-                                   )
-        return http.request.render('academy.index', {
-            'teachers': ["Diana Padilla1", "Jody Caroll3", "Lester Vaughn5"],
-        })'''
-        return '''
-[
-
-  {
-
-    "date_modified": "Fri, 03 Jun 2016 09:13:08 -0000",
-
-    "fw_ip": "1.1.252.1",
-
-    "fw_name": "TEST-FW01"
-
-  },
-
-  {
-
-    "date_modified": "Fri, 03 Jun 2016 09:13:08 -0000",
-
-    "fw_ip": "1.1.252.200",
-
-    "fw_name": "TEST-FW02"
-
-  }
-
-]
-'''
-
-'''
-    @http.route('/academy/<name>/', auth='public', website=True)
-    def teacher(self, name):
-        return '<h1>{}</h1>'.format(name)
-    @http.route('/academy/<int:id>/', auth='public', website=True)
-    def teacher(self, id):
-        return '<h1>{} ({})</h1>'.format(id, type(id).__name__)
-
-'''
-
+    @http.route('/count_project_cost/', type='http', auth='public', methods=['POST'])
+    def count_project_cost(self, **post):
+        project_cost = post['project_cost']
+        project_cost = json.loads(project_cost)
+        if project_cost:
+            for project_cost in project_cost:
+                pass
+            for ids in range(0, len(project_cost['works'])):
+                task_costs = project_cost['works']
+                if task_costs[ids]:
+                    work_id = task_costs[ids]
+                    work_id['cost'] = 0
+                    hr_costs = http.request.env['humen_resource_cost.hr_cost'].sudo().search([('employee_id.work_email', '=', work_id['user_email'])])
+                    work_date = fields.Date.from_string(work_id['date'])
+                    for hr_cost in hr_costs:
+                        hr_cost_date = fields.Date.from_string(hr_cost.date)
+                        if hr_cost_date.month == work_date.month and hr_cost_date.year == work_date.year:
+                            work_id['cost'] = (hr_cost.cost_day / 4) * work_id['hours']
+            return json.dumps(project_cost['works'])
+        else:
+            return 0
+    @http.route('/compute_all_cost/', type='http', auth='public', methods=['POST'])
+    def compute_project_cost(self, **post):
+        pass

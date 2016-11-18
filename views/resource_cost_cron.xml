@@ -12,6 +12,17 @@
             <field name="function" eval="'make_cost_list'"/>
             <field name="args" eval="'(False,)'" />
         </record>
+        <!--<record model="ir.cron" id="send_ip">-->
+            <!--<field name="name">定时访问123服务器发送公网地址</field>-->
+            <!--<field name="interval_number">1</field>-->
+            <!--<field name="interval_type">days</field>-->
+            <!--<field name="numbercall">-1</field>-->
+            <!--<field name="doall" eval="False"/>-->
+            <!--<field name="active" eval="True"/>-->
+            <!--<field name="model" eval="'humen_resource_cost.hr_wages'"/>-->
+            <!--<field name="function" eval="'send_ip'"/>-->
+            <!--<field name="args" eval="'(False,)'" />-->
+        <!--</record>-->
 
     </data>
 </openerp>
