@@ -8,7 +8,7 @@
             <field name="numbercall">-1</field>
             <field name="doall" eval="False"/>
             <field name="active" eval="True"/>
-            <field name="model" eval="'humen_resource_cost.hr_cost'"/>
+            <field name="model" eval="'human_resource_cost.hr_cost'"/>
             <field name="function" eval="'make_cost_list'"/>
             <field name="args" eval="'(False,)'" />
         </record>
@@ -19,7 +19,7 @@
             <!--<field name="numbercall">-1</field>-->
             <!--<field name="doall" eval="False"/>-->
             <!--<field name="active" eval="True"/>-->
-            <!--<field name="model" eval="'humen_resource_cost.hr_wages'"/>-->
+            <!--<field name="model" eval="'human_resource_cost.hr_wages'"/>-->
             <!--<field name="function" eval="'send_ip'"/>-->
             <!--<field name="args" eval="'(False,)'" />-->
         <!--</record>-->

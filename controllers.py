@@ -19,7 +19,7 @@ class Data(http.Controller):
                 if task_costs[ids]:
                     work_id = task_costs[ids]
                     work_id['cost'] = 0
-                    hr_costs = http.request.env['humen_resource_cost.hr_cost'].sudo().search([('employee_id.work_email', '=', work_id['user_email'])])
+                    hr_costs = http.request.env['human_resource_cost.hr_cost'].sudo().search([('employee_id.work_email', '=', work_id['user_email'])])
                     work_date = fields.Date.from_string(work_id['date'])
                     for hr_cost in hr_costs:
                         hr_cost_date = fields.Date.from_string(hr_cost.date)

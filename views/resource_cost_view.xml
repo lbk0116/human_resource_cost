@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-        <record model="ir.ui.view" id="humen_cost_form_view">
+        <record model="ir.ui.view" id="human_cost_form_view">
             <field name="name">hr_wages.form</field>
-            <field name="model" >humen_resource_cost.hr_wages</field>
+            <field name="model" >human_resource_cost.hr_wages</field>
             <field name="arch" type="xml">
                 <form string="hr_wages Form" create="false">
                     <group>
@@ -47,9 +47,9 @@
                 </form>
             </field>
         </record>
-        <record model="ir.ui.view" id="humen_cost_tree_view">
+        <record model="ir.ui.view" id="human_cost_tree_view">
             <field name="name">hr_wages.tree</field>
-            <field name="model">humen_resource_cost.hr_wages</field>
+            <field name="model">human_resource_cost.hr_wages</field>
             <field name="arch" type="xml">
                 <tree>
                     <field name="name" string = "姓名"/>
@@ -63,9 +63,9 @@
                 </tree>
             </field>
         </record>
-        <record model="ir.ui.view" id="humen_cost_search_view">
+        <record model="ir.ui.view" id="human_cost_search_view">
             <field name="name">hr_wages.search</field>
-            <field name="model">humen_resource_cost.hr_wages</field>
+            <field name="model">human_resource_cost.hr_wages</field>
             <field name="arch" type="xml">
                 <search  string="Search_t">
                     <field name="name" string = "姓名"/>
@@ -79,9 +79,9 @@
                 </search>
             </field>
         </record>
-        <record model="ir.ui.view" id="humen_resource_cost_hr_wages_graph">
-            <field name="name">humen_resource_cost.hr_wages_graph</field>
-            <field name="model">humen_resource_cost.hr_wages</field>
+        <record model="ir.ui.view" id="human_resource_cost_hr_wages_graph">
+            <field name="name">human_resource_cost.hr_wages_graph</field>
+            <field name="model">human_resource_cost.hr_wages</field>
             <field name="arch" type="xml">
                 <!--<field name="interval">month</field>-->
                 <graph string="hr_cost graph" type="bar" >
@@ -90,9 +90,9 @@
                 </graph>
             </field>
         </record>
-        <record model="ir.ui.view" id="humen_reimbursement_form_view">
+        <record model="ir.ui.view" id="human_reimbursement_form_view">
             <field name="name">reimbursement.form</field>
-            <field name="model" >humen_resource_cost.reimbursement</field>
+            <field name="model" >human_resource_cost.reimbursement</field>
             <field name="arch" type="xml">
                 <!--<form string="hr_cost Form" create="false" edit="true" >-->
                 <form string="reimbursement Form" create="false">
@@ -113,9 +113,9 @@
                 </form>
             </field>
         </record>
-        <record model="ir.ui.view" id="humen_reimbursement_tree_view">
+        <record model="ir.ui.view" id="human_reimbursement_tree_view">
             <field name="name">reimbursement.tree</field>
-            <field name="model">humen_resource_cost.reimbursement</field>
+            <field name="model">human_resource_cost.reimbursement</field>
             <field name="arch" type="xml">
                 <tree string="reimbursement Tree" >
                     <!--<field name ='employee_id' string = "关联人员" ></field>-->
@@ -128,9 +128,9 @@
                 </tree>
             </field>
         </record>
-        <record model="ir.ui.view" id="humen_reimbursement_search_view">
+        <record model="ir.ui.view" id="human_reimbursement_search_view">
             <field name="name">reimbursement.search</field>
-            <field name="model">humen_resource_cost.reimbursement</field>
+            <field name="model">human_resource_cost.reimbursement</field>
             <field name="arch" type="xml">
                 <search string="search_s">
                 <group expand="0" string="分组">
@@ -143,9 +143,9 @@
 
             </field>
         </record>
-        <record model="ir.ui.view" id="humen_resource_cost_reimbursement_graph">
-            <field name="name">humen_resource_cost.reimbursement_graph</field>
-            <field name="model">humen_resource_cost.reimbursement</field>
+        <record model="ir.ui.view" id="human_resource_cost_reimbursement_graph">
+            <field name="name">human_resource_cost.reimbursement_graph</field>
+            <field name="model">human_resource_cost.reimbursement</field>
             <field name="arch" type="xml">
                 <!--<field name="interval">month</field>-->
                 <graph string="hr_cost graph" type="bar" >
@@ -154,9 +154,9 @@
                 </graph>
             </field>
         </record>
-        <record model="ir.ui.view" id="humen_export_form_view">
+        <record model="ir.ui.view" id="human_export_form_view">
             <field name="name">hr_cost.form</field>
-            <field name="model" >humen_resource_cost.hr_cost</field>
+            <field name="model" >human_resource_cost.hr_cost</field>
             <field name="arch" type="xml">
                 <!--<form string="hr_cost Form" create="false" edit="true" >-->
                 <form string="hr_cost Form" create="false">
@@ -187,9 +187,9 @@
                 </form>
             </field>
         </record>
-        <record model="ir.ui.view" id="humen_export_tree_view">
+        <record model="ir.ui.view" id="human_export_tree_view">
             <field name="name">hr_cost.tree</field>
-            <field name="model">humen_resource_cost.hr_cost</field>
+            <field name="model">human_resource_cost.hr_cost</field>
             <field name="arch" type="xml">
                 <tree string="hr_cost Tree" >
                     <field name ='employee_id' string = "姓名"></field>
@@ -201,9 +201,9 @@
                 </tree>
             </field>
         </record>
-        <record model="ir.ui.view" id="humen_export_search_view">
+        <record model="ir.ui.view" id="human_export_search_view">
             <field name="name">hr_cost.search</field>
-            <field name="model">humen_resource_cost.hr_cost</field>
+            <field name="model">human_resource_cost.hr_cost</field>
             <field name="arch" type="xml">
                 <search string="search_s">
                 <group expand="0" string="分组">
@@ -218,9 +218,9 @@
 
             </field>
         </record>
-        <record model="ir.ui.view" id="humen_resource_cost_hr_cost_graph">
-            <field name="name">humen_resource_cost.hr_cost_graph</field>
-            <field name="model">humen_resource_cost.hr_cost</field>
+        <record model="ir.ui.view" id="human_resource_cost_hr_cost_graph">
+            <field name="name">human_resource_cost.hr_cost_graph</field>
+            <field name="model">human_resource_cost.hr_cost</field>
                 <field name="arch" type="xml">
                 <!--<field name="interval">month</field>-->
                     <graph string="hr_cost graph" type="bar" >

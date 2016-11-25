@@ -18,7 +18,7 @@ DATE_FORMAT = "%Y-%m"
 
 
 class hr_wages(models.Model):
-    _name = 'humen_resource_cost.hr_wages'
+    _name = 'human_resource_cost.hr_wages'
 
     name  = fields.Char(string="姓名")
     monthly_wages = fields.Float(string="月工资")  # 月工资
@@ -56,9 +56,9 @@ class hr_wages(models.Model):
                            + record.asset_depreciation_allocation
 
 
-    hr_cost_ids = fields.One2many('humen_resource_cost.hr_cost','employee_id',ondelete = 'set null',string="成本表")
+    hr_cost_ids = fields.One2many('human_resource_cost.hr_cost','employee_id',ondelete = 'set null',string="成本表")
     #cost = fields.Float(string="费用按照(0.5天计算)",related = "hr_cost_ids.cost")#这个cost要显示最后一个即本月的费用,得处理一下
-    reimbursement_ids =fields.One2many('humen_resource_cost.reimbursement','employee_id',ondelete = 'set null',string="报销表")
+    reimbursement_ids =fields.One2many('human_resource_cost.reimbursement','employee_id',ondelete = 'set null',string="报销表")
     #监听这个字段,如果这个字段又出现了本表的ID,本字段就变化
 
     # 此条字段是为了便于显示
@@ -99,7 +99,7 @@ class hr_wages(models.Model):
     #     get_url_content('http://123.56.147.94:8069/get_ip/', session)
 
 class hr_cost(models.Model):
-    _name ='humen_resource_cost.hr_cost'
+    _name ='human_resource_cost.hr_cost'
 
     date = fields.Date(string="月份")
     monthly_wage_s= fields.Float(string="月工资")  # 月工资
@@ -107,8 +107,8 @@ class hr_cost(models.Model):
     cost_coefficient = fields.Float(string="费用系数", default=1)  # 费用系数
     cost_day = fields.Float(string="费用按照(0.5天计算)",store=True,compute='_get_date_cost')
     cost_month = fields.Float(string="费用按照(月计算)", store=True, compute='_get_date_cost')
-    employee_id = fields.Many2one('humen_resource_cost.hr_wages',ondelete='set null',string="员工")
-    reimbursement_ids = fields.One2many('humen_resource_cost.reimbursement',"hr_cost_id",ondelete='set null',string="报销表",store =True)
+    employee_id = fields.Many2one('human_resource_cost.hr_wages',ondelete='set null',string="员工")
+    reimbursement_ids = fields.One2many('human_resource_cost.reimbursement',"hr_cost_id",ondelete='set null',string="报销表",store =True)
 
     department_first = fields.Char(string="一级部门")
     department_second = fields.Char(string="二级部门")
@@ -142,10 +142,10 @@ class hr_cost(models.Model):
         #print '这里要实现一个安排动作,每天检测工资表里的日期,如果'
         now = fields.datetime.now()
         #print now.day
-        recs = self.env['humen_resource_cost.hr_wages'].search([])
+        recs = self.env['human_resource_cost.hr_wages'].search([])
         for rec in recs:
             exist = 0
-            strs = self.env['humen_resource_cost.hr_cost'].search([("employee_id", "=", rec.id)])
+            strs = self.env['human_resource_cost.hr_cost'].search([("employee_id", "=", rec.id)])
             # print '++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
             for str in strs:
                 #print str.date.year,str.date.month
@@ -156,7 +156,7 @@ class hr_cost(models.Model):
                     break
             if exist==1:
                 continue
-            id = self.env['humen_resource_cost.hr_cost'].create({'employee_id': rec.id,'monthly_wage_s':rec.monthly_wages,'date':now,"cost_coefficient":rec.cost_coefficient,\
+            id = self.env['human_resource_cost.hr_cost'].create({'employee_id': rec.id,'monthly_wage_s':rec.monthly_wages,'date':now,"cost_coefficient":rec.cost_coefficient,\
                                                                 "department_first":rec.department_first,"department_second":rec.department_second,"department_third":rec.department_third})
             if not id.date:
                 print "成本表时间创建不成功"
@@ -180,7 +180,7 @@ class hr_cost(models.Model):
 
 
 class reimbursement(models.Model):
-    _name = 'humen_resource_cost.reimbursement'
+    _name = 'human_resource_cost.reimbursement'
 
     name = fields.Char(string="姓名")
     work_mail  = fields.Char(string="南天邮箱")
@@ -190,8 +190,8 @@ class reimbursement(models.Model):
     kinds = fields.Char(string = "费用种类")
     project = fields.Char(string = "项目名称")
     pay = fields.Float(string = "报销金额")
-    hr_cost_id = fields.Many2one('humen_resource_cost.hr_cost', ondelete='set null', string="工资单",store =True,compute = "reimbursement_match_hr_cost")
-    employee_id = fields.Many2one('humen_resource_cost.hr_wages',ondelete='set null', string="报销人",store = True, compute = "reimbursement_match_employee")
+    hr_cost_id = fields.Many2one('human_resource_cost.hr_cost', ondelete='set null', string="工资单",store =True,compute = "reimbursement_match_hr_cost")
+    employee_id = fields.Many2one('human_resource_cost.hr_wages',ondelete='set null', string="报销人",store = True, compute = "reimbursement_match_employee")
 
     test = fields.Char(string="数据状态")
 
@@ -201,7 +201,7 @@ class reimbursement(models.Model):
     @api.multi
     def reimbursement_match_employee(self):
         for rec in self:
-            ress = self.env['humen_resource_cost.hr_wages'].search([("work_email",'=',rec.work_mail)])
+            ress = self.env['human_resource_cost.hr_wages'].search([("work_email",'=',rec.work_mail)])
             if ress:
                 rec.employee_id = ress.id
                 rec.test = '已关联到人员'
@@ -217,7 +217,7 @@ class reimbursement(models.Model):
             if count.employee_id:
                 if count.date:
                     date_reim = fields.Datetime.from_string(count.date)
-                    ress = self.env['humen_resource_cost.hr_cost'].search([("employee_id", "=", count.employee_id.id)])
+                    ress = self.env['human_resource_cost.hr_cost'].search([("employee_id", "=", count.employee_id.id)])
                     for res in ress:
                         if res.date:
                             date_cost = fields.Datetime.from_string(res.date)
