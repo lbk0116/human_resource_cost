@@ -20,33 +20,33 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 
-#. module: humen_resource_cost
-#: model:ir.ui.menu,name:humen_resource_cost.resource_cost_menu
+#. module: human_resource_cost
+#: model:ir.ui.menu,name:human_resource_cost.resource_cost_menu
 msgid "Cost"
 msgstr "成本表"
 
 
-#. module: humen_resource_cost
-#: model:ir.ui.menu,name:humen_resource_cost.resource_reimburse_menu
+#. module: human_resource_cost
+#: model:ir.ui.menu,name:human_resource_cost.resource_reimburse_menu
 msgid "Reimburse"
 msgstr "报销表"
 
-#. module: humen_resource_cost
-#: model:ir.ui.menu,name:humen_resource_cost.all_cost_menu
+#. module: human_resource_cost
+#: model:ir.ui.menu,name:human_resource_cost.all_cost_menu
 msgid "All Cost"
 msgstr "个人成本表"
 
-#. module: humen_resource_cost
-#: model:ir.ui.menu,name:humen_resource_cost.all_export_menu
+#. module: human_resource_cost
+#: model:ir.ui.menu,name:human_resource_cost.all_export_menu
 msgid "All Export"
 msgstr "月度成本表"
 
-#. module: humen_resource_cost
-#: model:ir.ui.menu,name:humen_resource_cost.all_reimburse_menu
+#. module: human_resource_cost
+#: model:ir.ui.menu,name:human_resource_cost.all_reimburse_menu
 msgid "All Reimburse"
 msgstr "报销明细表"
 
-#. module: humen_resource_cost
-#: model:ir.ui.menu,name:humen_resource_cost.main_resource_cost_menu
+#. module: human_resource_cost
+#: model:ir.ui.menu,name:human_resource_cost.main_resource_cost_menu
 msgid "Resource cost"
 msgstr "成本管理"

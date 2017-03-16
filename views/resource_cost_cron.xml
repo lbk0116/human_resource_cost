@@ -10,7 +10,7 @@
             <field name="active" eval="True"/>
             <field name="model" eval="'human_resource_cost.hr_cost'"/>
             <field name="function" eval="'make_cost_list'"/>
-            <field name="args" eval="'(False,)'" />
+            <field name="args" eval="'(False,)'"/>
         </record>
         <!--<record model="ir.cron" id="send_ip">-->
             <!--<field name="name">定时访问123服务器发送公网地址</field>-->
@@ -23,6 +23,5 @@
             <!--<field name="function" eval="'send_ip'"/>-->
             <!--<field name="args" eval="'(False,)'" />-->
         <!--</record>-->
-
     </data>
 </openerp>

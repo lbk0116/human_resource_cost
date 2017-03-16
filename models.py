@@ -55,11 +55,11 @@ class hr_wages(models.Model):
                            + record.three_funds + record.department_alaverage_amortization \
                            + record.asset_depreciation_allocation
 
-
     hr_cost_ids = fields.One2many('human_resource_cost.hr_cost','employee_id',ondelete = 'set null',string="成本表")
-    #cost = fields.Float(string="费用按照(0.5天计算)",related = "hr_cost_ids.cost")#这个cost要显示最后一个即本月的费用,得处理一下
-    reimbursement_ids =fields.One2many('human_resource_cost.reimbursement','employee_id',ondelete = 'set null',string="报销表")
-    #监听这个字段,如果这个字段又出现了本表的ID,本字段就变化
+    # cost = fields.Float(string="费用按照(0.5天计算)",related = "hr_cost_ids.cost")#这个cost要显示最后一个即本月的费用,得处理一下
+
+    reimbursement_ids = fields.One2many('human_resource_cost.reimbursement','employee_id',ondelete = 'set null',string="报销表")
+    # 监听这个字段,如果这个字段又出现了本表的ID,本字段就变化
 
     # 此条字段是为了便于显示
     cost_day = fields.Float(string="费用按照(0.5天计算)", store=True, compute='_get_data_cost')
@@ -70,10 +70,10 @@ class hr_wages(models.Model):
                 x.cost_day = x.hr_cost_ids[-1].cost_day
 
 
-    #test = fields.Char(string="测试字段")
+    # test = fields.Char(string="测试字段")
 
 
-    #给123发送公网IP
+    # 给123发送公网IP
     # @api.multi
     # def send_ip(self):
     #     loginurl = 'http://123.56.147.94:8069/web/login?db=nantian'
@@ -136,25 +136,24 @@ class hr_cost(models.Model):
             else:
                 record.test = "报销表不存在或未关联"
 
-    #这里要实现一个安排动作,每月创建一次下个月的的成本表
+    # 这里要实现一个安排动作,每月创建一次下个月的的成本表
     @api.multi
     def make_cost_list(self):
-        #print '这里要实现一个安排动作,每天检测工资表里的日期,如果'
+        # print '这里要实现一个安排动作,每天检测工资表里的日期,如果'
         now = fields.datetime.now()
-        #print now.day
+        # print now.day
         recs = self.env['human_resource_cost.hr_wages'].search([])
         for rec in recs:
             exist = 0
             strs = self.env['human_resource_cost.hr_cost'].search([("employee_id", "=", rec.id)])
-            # print '++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
             for str in strs:
-                #print str.date.year,str.date.month
+                # print str.date.year,str.date.month
                 st = fields.Date.from_string(str.date)
                 if st.year == now.year and st.month == now.month:
                     # print st.year,st.month
                     exist = 1
                     break
-            if exist==1:
+            if exist == 1:
                 continue
             id = self.env['human_resource_cost.hr_cost'].create({'employee_id': rec.id,'monthly_wage_s':rec.monthly_wages,'date':now,"cost_coefficient":rec.cost_coefficient,\
                                                                 "department_first":rec.department_first,"department_second":rec.department_second,"department_third":rec.department_third})
@@ -162,7 +161,7 @@ class hr_cost(models.Model):
                 print "成本表时间创建不成功"
 
 
-    #总计整个月的实报实销
+    # 总计整个月的实报实销
     @api.multi
     @api.depends('reimbursement_ids')
     def total_monthly_fee_for_service(self):
@@ -170,21 +169,19 @@ class hr_cost(models.Model):
             for n in m.reimbursement_ids:
                 m.monthly_fee_for_service +=n.pay
 
-
-
     @api.depends('employee_id.sum','monthly_wage_s','monthly_fee_for_service','cost_coefficient')
     def _get_date_cost(self):
         for record in self:
             record.cost_month = (record.employee_id.sum+record.monthly_wage_s+record.monthly_fee_for_service)* record.cost_coefficient
-            record.cost_day = (record.cost_month/ 21.5) * 0.5
+            record.cost_day = (record.cost_month / 21.5) * 0.5
 
 
 class reimbursement(models.Model):
     _name = 'human_resource_cost.reimbursement'
 
     name = fields.Char(string="姓名")
-    work_mail  = fields.Char(string="南天邮箱")
-    #name = fields.Char(related='hr_cost_id.employee_id', string="报销人")
+    work_mail = fields.Char(string="南天邮箱")
+    # name = fields.Char(related='hr_cost_id.employee_id', string="报销人")
     department = fields.Char(string = "报销部门")
     date = fields.Date(string = "报销日期")
     kinds = fields.Char(string = "费用种类")
@@ -195,8 +192,8 @@ class reimbursement(models.Model):
 
     test = fields.Char(string="数据状态")
 
-    #报销表导入就触动函数与人员表关联
-    #ID不能触动
+    # 报销表导入就触动函数与人员表关联
+    # ID不能触动
     @api.depends('work_mail')
     @api.multi
     def reimbursement_match_employee(self):
@@ -209,7 +206,7 @@ class reimbursement(models.Model):
                 rec.test = '未关联到人员'
                 print rec.test
 
-    #报销和人员表关联之后,将报销表与成本表关联
+    # 报销和人员表关联之后,将报销表与成本表关联
     @api.multi
     @api.depends('employee_id','date')
     def reimbursement_match_hr_cost(self):
@@ -221,9 +218,9 @@ class reimbursement(models.Model):
                     for res in ress:
                         if res.date:
                             date_cost = fields.Datetime.from_string(res.date)
-                            #应该只有一个月份符合if条件
+                            # 应该只有一个月份符合if条件
                             if date_reim.month == date_cost.month:
-                            #把成本表的ID存到报销表下,即关联起来
+                            # 把成本表的ID存到报销表下,即关联起来
                                 # print date_reim.month
                                 # print date_cost.month
                                 count.hr_cost_id = res.id
@@ -238,10 +235,8 @@ class reimbursement(models.Model):
                             res.test = "成本时间不合格"
                 else:
                     count.test = '报销时间不合格'
-            else :
+            else:
                 count.test = '未关联到人员'
-
-
 
             # else:
             #     count.test = "报销和人员表仍没关联上"

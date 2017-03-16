@@ -32,9 +32,10 @@
                                  <!--<field name="sum" string = "test总计"/>-->
                              </group>
                     </group>
-                    <field name ='hr_cost_ids' string = "人力资源">
+                    <group>
+                    <field name ='hr_cost_ids' string = "薪酬总计(月)">
                         <tree string="Registered feedback" edit="true">
-                            <field name="date" string = "月份"/>
+                            <field name="date" string = "日期"/>
                             <field name="monthly_wage_s" string = "当月工资"/>
                             <field name="monthly_fee_for_service" string = "月度实报实销"/>
                             <!--<field name="cost_coefficient" string = "费用系数"/>-->
@@ -44,6 +45,7 @@
                             <!--<field name="employee_id" string = "员工报销明细"/>-->
                         </tree>
                     </field>
+                    </group>
                 </form>
             </field>
         </record>
@@ -101,12 +103,14 @@
                             <!--<field name ='hr_cost_id' string = "关联工资表" ></field>-->
                             <!--<field name ='employee_id' string = "关联人员" ></field>-->
                             <field name ='name' string = "姓名" ></field>
-                            <field name ='department' string = "部门"/>
-                            <field name="project" string = "项目"/>
-                            <field name="date" string = "日期" />
+                            <field name="date" string = "消费日期" />
                             <field name="kinds" string = "费用种类"></field>
                             <field name="pay" string = "报销费用"/>
-                            <field name="work_mail" string = "南天邮箱"/>
+                        </group>
+                        <group>
+                            <field name ='department' string = "部门"/>
+                            <field name="project" string = "项目"/>
+                             <field name="work_mail" string = "南天邮箱"/>
                             <field name="test" string = "数据状态"/>
                         </group>
                     </group>
@@ -123,8 +127,8 @@
                     <field name ='department' string = "部门"/>
                     <field name="date" string = "日期" />
                     <field name="kinds" string = "费用种类"></field>
-                    <field name="project" string = "项目"/>
                     <field name="pay" string = "报销费用"/>
+                    <field name="project" string = "项目"/>
                 </tree>
             </field>
         </record>
@@ -163,18 +167,23 @@
                     <group>
                         <group>
                         <field name ='employee_id' string = "姓名" ></field>
-                        <field name ='date' string = "月份"  />
-                        <field name="cost_day" string = "费用（按照0.5天计算)"/>
-                        <field name="cost_month" string = "费用（月总计)"/>
+                        <field name ='date' string = "录入日期"  />
+                         </group>
+                        <group>
                         <field name="monthly_wage_s" string = "月工资" />
+                        <field name="cost_month" string = "费用（月总计)"/>
+                        <field name="cost_day" string = "费用（按照0.5天计算)"/>
+                       </group>
+                    </group>
+                        <group>
                         <field name="monthly_fee_for_service" string = "月度实报实销"></field>
                         <field name ='reimbursement_ids' string = "报销列表">
                                     <tree string="Registered feedback" edit="true">
                                         <!--<field name ='department' string = "部门"/>-->
                                         <field name="date" string = "日期" />
                                         <field name="kinds" string = "费用种类"></field>
-                                        <field name="project" string = "项目"/>
                                         <field name="pay" string = "报销费用"/>
+                                        <field name="project" string = "项目"/>
                                     </tree>
                         </field>
                         <field name="department_first" string = " 一级部门"/>
@@ -182,8 +191,6 @@
                         <field name="department_third" string = " 三级部门"/>
                         <field name="test" string = "数据状态"/>
                         </group>
-                    </group>
-
                 </form>
             </field>
         </record>
